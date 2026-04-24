@@ -1,0 +1,28 @@
+================================================================
+  CON EDISON — ELECTRIC SERVICE BILL
+================================================================
+
+  Service address:   Ridgewood Bistro LLC
+                     28 East Ridgewood Ave, Ridgewood NJ 07450
+  Account #:         1234-5678-90
+  Billing period:    03/02/2026 — 04/01/2026 (30 days)
+  Statement date:    04/02/2026
+  Due date:          04/22/2026
+
+----------------------------------------------------------------
+  Previous balance                                    $   0.00
+  Payment received 03/28/2026                       - $ 641.88
+
+  Electricity usage:    4,218 kWh
+    @ supply + delivery + surcharges                  $ 624.12
+  Sales tax                                           $  44.78
+  Late fee                                            $   0.00
+  Service fee                                         $  18.50
+----------------------------------------------------------------
+  TOTAL DUE                                           $ 687.40
+
+  AUTOPAY: Scheduled ACH debit 04/22/2026
+
+  (ACH actually hit client's bank 04/03/2026 — one of the
+   small things a firm's bookkeeper has to notice and
+   match against the bank feed.)

@@ -1,0 +1,38 @@
+================================================================
+  SYSCO FOODS — WHOLESALE INVOICE
+  One Sysco Way, Jersey City NJ 07305
+================================================================
+
+  Bill to:      Ridgewood Bistro LLC
+                28 East Ridgewood Ave
+                Ridgewood, NJ 07450
+
+  Invoice #:    44839
+  Invoice date: 04/02/2026
+  Due date:     Net 15 · 04/17/2026
+  PO #:         RB-APR-001
+
+----------------------------------------------------------------
+  Qty   Item                             Unit     Ext. Total
+----------------------------------------------------------------
+    4   Beef short rib, case (20 lb)    $142.50   $  570.00
+    6   Atlantic salmon, fillet 10lb    $ 96.40   $  578.40
+   12   Mixed greens, 3lb bag           $ 18.25   $  219.00
+    8   Heirloom tomato, flat           $ 32.10   $  256.80
+    2   Olive oil, 3L tin                $ 58.90   $  117.80
+   24   Dinner rolls, dozen              $  9.85   $  236.40
+    6   Imported pecorino, 1kg wheel    $ 41.20   $  247.20
+   14   House wine (red), case           $  8.75   $  122.50
+
+                                        Subtotal  $2,348.10
+                                        Less disc $ (  0.28)
+                                        TOTAL DUE $2,347.82
+
+  Payment method: ACH — paid 04/02/2026
+  Thank you for your business.
+
+================================================================
+  NOTE FROM CLIENT (sticky note on scanned receipt):
+  "This one is the big weekly order — usually hits around
+   $2.2–2.5k. Sysco emails the invoice the morning after."
+================================================================

@@ -1,0 +1,51 @@
+================================================================
+  GUSTO PAYROLL — EMPLOYER SUMMARY
+  Ridgewood Bistro LLC
+  Pay period: April 2026
+================================================================
+
+PAY RUN 04  — Processed 04/08/2026
+----------------------------------------------------------------
+  Gross wages:                                   $ 5,100.00
+  Employer FICA + Medicare:                      $   390.15
+  Employer FUTA/SUTA:                            $   132.60
+  Employee withholding:                          $ ( 875.00 )
+  Employee FICA + Medicare:                      $ ( 390.15 )
+  --------------------------------------------------------------
+  Net paid to employees (ACH):                   $ 4,225.00
+  Total employer cost:                           $ 4,225.00
+
+  Funding debit from Valley National ****3421:   $ 8,450.00
+    (covers employer cost + taxes + fees, both runs)
+
+PAY RUN 05  — Processed 04/20/2026
+----------------------------------------------------------------
+  Gross wages:                                   $ 5,100.00
+  Employer FICA + Medicare:                      $   390.15
+  Employer FUTA/SUTA:                            $   132.60
+  Employee withholding:                          $ ( 875.00 )
+  Employee FICA + Medicare:                      $ ( 390.15 )
+  --------------------------------------------------------------
+  Net paid to employees (ACH):                   $ 4,225.00
+  Total employer cost:                           $ 4,225.00
+
+  Funding debit from Valley National ****3421:   $ 8,450.00
+
+================================================================
+  MONTH TOTALS — APRIL 2026
+================================================================
+  Gross wages:                                   $10,200.00
+  Employer taxes (FICA/FUTA/SUTA):               $ 1,045.50
+  Employee taxes withheld (pass-through):        $ 2,530.30
+  Net paid to employees:                         $ 8,450.00
+  Total bank funding debited:                    $16,900.00
+
+  Employees on payroll: 11
+  Contractor payments this period: 0
+
+  GL mapping suggestion:
+    Dr  6000 · Salaries & Wages            $10,200.00
+    Dr  6050 · Payroll Taxes (employer)    $ 1,045.50
+    Dr  2120 · Payroll Liab — Withholding  $ 2,530.30
+    Cr  1010 · Valley Nat'l Checking       $16,900.00
+  (AIVI posts this automatically; bookkeeper only reviews.)

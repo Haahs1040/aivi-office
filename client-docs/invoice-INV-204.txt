@@ -1,0 +1,30 @@
+================================================================
+  RIDGEWOOD BISTRO LLC — CUSTOMER INVOICE
+================================================================
+
+  Invoice #:    INV-204
+  Issue date:   04/23/2026
+  Due date:     Net 15 · 05/08/2026
+
+  Bill to:      Smith Family / J. Smith
+                14 Maple St, Ho-Ho-Kus NJ 07423
+                smith.j@example.com
+
+----------------------------------------------------------------
+  Description                                     Amount
+----------------------------------------------------------------
+  Private catering — 40-person dinner,
+    April 22 2026, Ridgewood NJ
+    · Four-course plated dinner, 40 covers      $ 1,600.00
+    · Server staffing (3 @ $50)                  $   150.00
+                                        Subtotal $ 1,750.00
+                                        Tax      $     0.00
+                                        TOTAL    $ 1,750.00
+
+  Payment: Check or ACH to account ****3421
+
+----------------------------------------------------------------
+  STATUS AS OF 04/23/2026: Invoice sent, NOT YET PAID.
+  (Good example of AR that AIVI tracks without hitting the
+   bank feed yet — it'll sit in 1200 Accounts Receivable
+   until payment clears.)
