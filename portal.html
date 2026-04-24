@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AIVI Client Portal · Ridgewood Bistro LLC</title>
+<meta name="description" content="Answer a few quick questions about flagged transactions so your bookkeeper can close the books." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f8fb;
+    --bg-soft: #eef0f6;
+    --card: #ffffff;
+    --card-hover: #fbfcff;
+    --border: #e4e7ef;
+    --border-strong: #c9cfdd;
+    --text: #121523;
+    --text-soft: #4a5266;
+    --text-dim: #7b8297;
+    --accent: #5b7bff;
+    --accent-2: #8a5dff;
+    --accent-soft: #e8edff;
+    --accent-glow: rgba(91,123,255,0.18);
+    --success: #10a554;
+    --success-soft: #dff5e8;
+    --warning: #b97c0e;
+    --warning-soft: #fdf3dc;
+    --danger: #c43737;
+    --danger-soft: #fce4e4;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow: 0 1px 2px rgba(18,21,35,0.04), 0 4px 12px rgba(18,21,35,0.04);
+    --shadow-lg: 0 4px 14px rgba(18,21,35,0.06), 0 20px 50px rgba(18,21,35,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background:
+      radial-gradient(ellipse at top left, rgba(91,123,255,0.08), transparent 50%),
+      radial-gradient(ellipse at top right, rgba(138,93,255,0.06), transparent 50%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+  /* Top bar */
+  nav.top {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    max-width: 780px;
+    margin: 0 auto; padding: 0 20px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center;
+    box-shadow: 0 4px 14px var(--accent-glow);
+    font-size: 14px; font-weight: 800; color: #fff;
+  }
+  .brand-name { font-size: 14px; letter-spacing: 0.06em; color: var(--text); }
+  .brand-sub { font-size: 11px; color: var(--text-dim); margin-top: -2px; }
+  .nav-user {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+  .avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #f59e0b, #dc2626);
+    display: grid; place-items: center;
+    color: #fff; font-weight: 600; font-size: 12px;
+  }
+  .nav-user-name { font-weight: 500; color: var(--text); }
+  .nav-user-firm { font-size: 11px; color: var(--text-dim); }
+
+  /* Header */
+  header.hero {
+    padding: 40px 0 28px;
+  }
+  .greeting-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  h1.greeting {
+    font-size: 28px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .progress-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; color: var(--text-soft);
+    box-shadow: var(--shadow);
+  }
+  .progress-dots { display: flex; gap: 4px; }
+  .progress-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border-strong);
+    transition: background 0.3s ease;
+  }
+  .progress-dot.done { background: var(--success); }
+  .subcopy {
+    color: var(--text-soft);
+    font-size: 15px;
+    margin: 0 0 18px;
+    max-width: 620px;
+  }
+  .bookkeeper-card {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 16px 8px 8px;
+    font-size: 13px;
+    box-shadow: var(--shadow);
+    width: fit-content;
+  }
+  .bk-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e, #0ea5e9);
+    display: grid; place-items: center;
+    color: #fff; font-weight: 600; font-size: 12px;
+  }
+  .bk-text { color: var(--text-soft); }
+  .bk-text b { color: var(--text); font-weight: 600; }
+
+  /* All-done banner */
+  .banner {
+    background: linear-gradient(135deg, var(--success-soft), #ffffff);
+    border: 1px solid var(--success);
+    border-left-width: 4px;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: none;
+    align-items: center;
+    gap: 16px;
+    animation: pop 0.4s ease;
+  }
+  .banner.show { display: flex; }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .banner-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--success); color: #fff;
+    display: grid; place-items: center;
+    font-size: 22px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .banner h3 { margin: 0 0 2px; font-size: 17px; }
+  .banner p { margin: 0; color: var(--text-soft); font-size: 13px; }
+
+  /* Question card */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .q-card.resolved {
+    background: var(--success-soft);
+    border-color: rgba(16,165,84,0.3);
+  }
+  .q-head {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .q-card.resolved .q-head { border-bottom-color: rgba(16,165,84,0.15); }
+  .q-index {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .q-card.resolved .q-index {
+    background: var(--success); color: #fff;
+  }
+  .q-title {
+    font-size: 17px; font-weight: 600; margin: 2px 0 4px;
+    line-height: 1.3;
+  }
+  .q-why {
+    font-size: 13px; color: var(--text-dim);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .q-why::before {
+    content: '';
+    display: inline-block;
+    width: 14px; height: 14px;
+    background: var(--warning); border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .q-card.resolved .q-why::before { background: var(--success); }
+
+  /* Transaction snapshot inside card */
+  .tx-snapshot {
+    margin: 16px 22px 0;
+    background: var(--bg-soft);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 14px 20px;
+    font-size: 13px;
+  }
+  .tx-field .lab {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 2px;
+  }
+  .tx-field .val { font-weight: 500; }
+  .tx-field .val.mono { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+  .tx-amount { color: var(--danger); }
+
+  /* Question body */
+  .q-body {
+    padding: 18px 22px 22px;
+  }
+  .q-prompt {
+    font-size: 14px; color: var(--text);
+    margin: 0 0 14px;
+  }
+
+  /* AI suggestion */
+  .ai-suggestion {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(91,123,255,0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+  .ai-badge {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ai-suggestion b { color: var(--text); font-weight: 600; }
+
+  /* Radio-card options */
+  .options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 560px) { .options { grid-template-columns: repeat(2, 1fr); } }
+  .option {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text);
+  }
+  .option:hover { border-color: var(--border-strong); background: var(--card-hover); }
+  .option.selected {
+    border-color: var(--accent); background: var(--accent-soft);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+  }
+  .option-icon { font-size: 14px; margin-right: 4px; }
+
+  /* Input fields */
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 500;
+    color: var(--text-soft); margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    font-size: 14px; font-family: inherit;
+    color: var(--text);
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .field textarea { min-height: 70px; resize: vertical; }
+
+  /* Upload */
+  .upload {
+    border: 2px dashed var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    text-align: center;
+    font-size: 13px; color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-bottom: 14px;
+  }
+  .upload:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .upload.has-file {
+    border-style: solid;
+    border-color: var(--success);
+    background: var(--success-soft);
+    color: var(--success);
+  }
+  .upload .icon { font-size: 20px; display: block; margin-bottom: 4px; }
+
+  /* Action buttons */
+  .q-actions {
+    display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-family: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    box-shadow: 0 4px 14px var(--accent-glow);
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-ghost:hover { background: var(--bg-soft); }
+  .btn-danger {
+    background: var(--card); color: var(--danger);
+    border: 1px solid var(--border);
+  }
+  .btn-danger:hover { background: var(--danger-soft); border-color: var(--danger); }
+  .btn-choice {
+    flex: 1; min-width: 0;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    line-height: 1.3;
+  }
+  .btn-choice:hover { border-color: var(--border-strong); background: var(--card-hover); }
+  .btn-choice .title { font-weight: 600; display: block; margin-bottom: 2px; }
+  .btn-choice .sub { font-size: 12px; color: var(--text-dim); }
+  .btn-choice.danger:hover { border-color: var(--danger); background: var(--danger-soft); }
+  .btn-choice.success:hover { border-color: var(--success); background: var(--success-soft); }
+
+  .choice-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  @media (max-width: 640px) { .choice-group { flex-direction: column; } }
+
+  /* Resolved state */
+  .resolved-body {
+    padding: 16px 22px 20px;
+    color: var(--text-soft);
+    font-size: 14px;
+  }
+  .resolved-body .check-line {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 4px;
+  }
+  .resolved-body .chk {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--success); color: #fff;
+    display: inline-grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .resolved-body b { color: var(--text); }
+
+  /* Helper section (demo only) */
+  .demo-helper {
+    background: #fffdf3;
+    border: 1px dashed var(--warning);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text-soft);
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .demo-helper .icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--warning); color: #fff;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .demo-helper .msg { flex: 1; min-width: 200px; }
+  .demo-helper b { color: var(--text); }
+
+  /* Footer */
+  footer {
+    padding: 32px 0 40px;
+    text-align: center;
+    font-size: 12px; color: var(--text-dim);
+  }
+  footer .lock {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  footer .lock-icon { color: var(--success); }
+
+  @media (max-width: 560px) {
+    header.hero { padding: 28px 0 20px; }
+    h1.greeting { font-size: 22px; }
+    .tx-snapshot { grid-template-columns: 1fr 1fr; }
+    .q-head, .q-body, .resolved-body { padding-left: 16px; padding-right: 16px; }
+    .tx-snapshot { margin-left: 16px; margin-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none;">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-name">AIVI OFFICE</div>
+        <div class="brand-sub">Client Portal</div>
+      </div>
+    </a>
+    <div class="nav-user">
+      <div style="text-align:right;">
+        <div class="nav-user-name">Maria L.</div>
+        <div class="nav-user-firm">Ridgewood Bistro LLC</div>
+      </div>
+      <div class="avatar">ML</div>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="greeting-row">
+      <h1 class="greeting">Hi Maria — 2 quick questions about April.</h1>
+      <div class="progress-pill">
+        <span id="progressText">0 of 2 answered</span>
+        <div class="progress-dots">
+          <div class="progress-dot" id="dot-1"></div>
+          <div class="progress-dot" id="dot-2"></div>
+        </div>
+      </div>
+    </div>
+    <p class="subcopy">
+      Your AIVI agents ran April close last night and flagged a couple of things they
+      weren't sure about. Answer below and your bookkeeper will finalize your books.
+      Should take about a minute.
+    </p>
+    <div class="bookkeeper-card">
+      <div class="bk-avatar">J</div>
+      <div class="bk-text"><b>Jordan Reyes</b> · your bookkeeper at Northside CPA is reviewing this with you</div>
+    </div>
+  </header>
+
+  <div class="demo-helper">
+    <div class="icon">★</div>
+    <div class="msg">
+      <b>Demo shortcut:</b> Click below to auto-fill the plausible answers Maria would give (lets you demo the flow without typing).
+    </div>
+    <button class="btn btn-ghost" id="autofill">Fill Maria's answers</button>
+  </div>
+
+  <!-- Success banner -->
+  <div id="banner" class="banner">
+    <div class="banner-icon">✓</div>
+    <div>
+      <h3>All set for April.</h3>
+      <p>Jordan has everything needed to close the books. You'll get the April P&amp;L in your inbox tomorrow morning.</p>
+    </div>
+  </div>
+
+  <!-- Question 1: Unknown Amex charge -->
+  <section class="q-card" id="q1">
+    <div class="q-head">
+      <div class="q-index">1</div>
+      <div>
+        <div class="q-title">What was this Amex charge for?</div>
+        <div class="q-why">Vendor isn't in your history — AIVI needs your help categorizing it.</div>
+      </div>
+    </div>
+
+    <div class="tx-snapshot">
+      <div class="tx-field">
+        <div class="lab">Date</div>
+        <div class="val mono">04/15/2026</div>
+      </div>
+      <div class="tx-field">
+        <div class="lab">Amount</div>
+        <div class="val mono tx-amount">-$287.50</div>
+      </div>
+      <div class="tx-field" style="grid-column: span 2;">
+        <div class="lab">Description on statement</div>
+        <div class="val mono">AMEX CHG CARD PMT — UNKNOWN VENDOR</div>
+      </div>
+    </div>
+
+    <div class="q-body">
+      <div class="ai-suggestion">
+        <div class="ai-badge">AI</div>
+        <div><b>AIVI suggests:</b> based on similar Amex patterns this year, this looks like a <b>Supplies</b> purchase. Confirm below or tell us what it actually was.</div>
+      </div>
+
+      <div class="q-prompt"><b>What category does this belong in?</b></div>
+      <div class="options" id="opts1">
+        <button class="option" data-cat="Supplies"><span class="option-icon">📦</span> Supplies</button>
+        <button class="option" data-cat="Meals"><span class="option-icon">🍽</span> Meals</button>
+        <button class="option" data-cat="Utilities"><span class="option-icon">💡</span> Utilities</button>
+        <button class="option" data-cat="Travel"><span class="option-icon">✈</span> Travel</button>
+        <button class="option" data-cat="Equipment"><span class="option-icon">🛠</span> Equipment</button>
+        <button class="option" data-cat="Other"><span class="option-icon">•••</span> Other</button>
+      </div>
+
+      <div class="field">
+        <label for="vendor1">Vendor name (optional but helpful)</label>
+        <input id="vendor1" type="text" placeholder="e.g. Restaurant Supply Co." />
+      </div>
+
+      <div class="field">
+        <label for="desc1">Brief note (optional)</label>
+        <textarea id="desc1" placeholder="Anything your bookkeeper should know about this purchase."></textarea>
+      </div>
+
+      <div class="upload" id="upload1">
+        <span class="icon">📎</span>
+        <div><b>Drop a receipt here</b> or click to upload · optional</div>
+      </div>
+
+      <div class="q-actions">
+        <button class="btn btn-ghost" data-skip="1">I don't remember — hold for later</button>
+        <button class="btn btn-primary" id="submit1" disabled>Submit answer</button>
+      </div>
+    </div>
+
+    <div class="resolved-body" id="resolved1" style="display:none;"></div>
+  </section>
+
+  <!-- Question 2: Duplicate Sysco charge -->
+  <section class="q-card" id="q2">
+    <div class="q-head">
+      <div class="q-index">2</div>
+      <div>
+        <div class="q-title">Sysco charged you twice — is one a duplicate?</div>
+        <div class="q-why">Same vendor, same amount, back-to-back days. Usually means a billing mistake.</div>
+      </div>
+    </div>
+
+    <div class="tx-snapshot">
+      <div class="tx-field">
+        <div class="lab">Charge #1</div>
+        <div class="val mono">04/18 · -$1,988.21</div>
+      </div>
+      <div class="tx-field">
+        <div class="lab">Charge #2</div>
+        <div class="val mono">04/19 · -$1,988.21</div>
+      </div>
+      <div class="tx-field" style="grid-column: span 2;">
+        <div class="lab">Vendor</div>
+        <div class="val mono">SYSCO FOODS PAYMENT REF#44919</div>
+      </div>
+    </div>
+
+    <div class="q-body">
+      <div class="ai-suggestion">
+        <div class="ai-badge">AI</div>
+        <div><b>AIVI found one invoice</b> from Sysco for this amount (ref #44919), so the 4/19 charge looks like a duplicate bank post. Confirm below and we'll request a refund.</div>
+      </div>
+
+      <div class="q-prompt"><b>Was the 4/19 charge a mistake?</b></div>
+      <div class="choice-group">
+        <button class="btn-choice success" data-choice="duplicate">
+          <span class="title">✓ Yes, it's a duplicate</span>
+          <span class="sub">Reverse it and chase a refund from Sysco</span>
+        </button>
+        <button class="btn-choice" data-choice="real">
+          <span class="title">Both are real</span>
+          <span class="sub">Two separate orders that happened to match</span>
+        </button>
+        <button class="btn-choice danger" data-choice="unsure">
+          <span class="title">Not sure</span>
+          <span class="sub">Hold for Jordan to look at</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="resolved-body" id="resolved2" style="display:none;"></div>
+  </section>
+
+  <footer>
+    <div class="lock">
+      <span class="lock-icon">🔒</span>
+      Secured session · expires in 24h
+    </div>
+    <div>Powered by AIVI OFFICE · <a href="demo.html">← Back to bookkeeper view</a></div>
+  </footer>
+
+</main>
+
+<script>
+  const state = {
+    q1: { category: null, vendor: '', desc: '', file: null, resolved: false },
+    q2: { answer: null, resolved: false }
+  };
+
+  // -------- Q1 (Amex) --------
+  const opts1 = document.querySelectorAll('#opts1 .option');
+  const submit1 = document.getElementById('submit1');
+  opts1.forEach(opt => {
+    opt.addEventListener('click', () => {
+      opts1.forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      state.q1.category = opt.dataset.cat;
+      submit1.disabled = false;
+    });
+  });
+  document.getElementById('vendor1').addEventListener('input', e => state.q1.vendor = e.target.value);
+  document.getElementById('desc1').addEventListener('input', e => state.q1.desc = e.target.value);
+
+  const upload1 = document.getElementById('upload1');
+  upload1.addEventListener('click', () => {
+    // Simulate a file pick without actually opening a dialog in the demo
+    state.q1.file = 'amex_receipt_4_15.jpg';
+    upload1.classList.add('has-file');
+    upload1.innerHTML = '<span class="icon">✓</span><div><b>amex_receipt_4_15.jpg</b> · 218 KB · attached</div>';
+  });
+
+  submit1.addEventListener('click', () => resolveQ1());
+
+  function resolveQ1() {
+    state.q1.resolved = true;
+    document.getElementById('q1').classList.add('resolved');
+    document.querySelector('#q1 .q-body').style.display = 'none';
+    document.querySelector('#q1 .tx-snapshot').style.display = 'none';
+    const r = document.getElementById('resolved1');
+    r.style.display = 'block';
+    const vendor = state.q1.vendor || 'Unlabeled vendor';
+    const note = state.q1.desc ? `<div class="check-line"><span class="chk">✓</span> Note saved: "${escapeHTML(state.q1.desc)}"</div>` : '';
+    const file = state.q1.file ? `<div class="check-line"><span class="chk">✓</span> Receipt attached: <b>${state.q1.file}</b></div>` : '';
+    r.innerHTML = `
+      <div class="check-line"><span class="chk">✓</span> Posted to <b>${categoryToGL(state.q1.category)}</b></div>
+      <div class="check-line"><span class="chk">✓</span> Vendor "${escapeHTML(vendor)}" added to your vendor memory</div>
+      ${note}
+      ${file}
+      <div style="margin-top:8px; color: var(--text-dim); font-size:12px;">Jordan has been notified.</div>
+    `;
+    markDone(1);
+  }
+
+  document.querySelectorAll('[data-skip]').forEach(b => {
+    b.addEventListener('click', () => {
+      const n = b.dataset.skip;
+      state['q'+n].resolved = true;
+      state['q'+n].skipped = true;
+      const card = document.getElementById('q' + n);
+      card.classList.add('resolved');
+      card.querySelector('.q-body').style.display = 'none';
+      card.querySelector('.tx-snapshot').style.display = 'none';
+      document.getElementById('resolved' + n).style.display = 'block';
+      document.getElementById('resolved' + n).innerHTML = `
+        <div class="check-line"><span class="chk">!</span> Held for Jordan's review — no action from you required.</div>
+      `;
+      markDone(n);
+    });
+  });
+
+  // -------- Q2 (Sysco duplicate) --------
+  document.querySelectorAll('[data-choice]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.q2.answer = b.dataset.choice;
+      state.q2.resolved = true;
+      document.getElementById('q2').classList.add('resolved');
+      document.querySelector('#q2 .q-body').style.display = 'none';
+      document.querySelector('#q2 .tx-snapshot').style.display = 'none';
+      const r = document.getElementById('resolved2');
+      r.style.display = 'block';
+      let body = '';
+      if (b.dataset.choice === 'duplicate') {
+        body = `
+          <div class="check-line"><span class="chk">✓</span> 4/19 charge <b>reversed</b> from QuickBooks</div>
+          <div class="check-line"><span class="chk">✓</span> AIVI drafted an email to Sysco requesting a refund — Jordan will send after review</div>
+          <div class="check-line"><span class="chk">✓</span> Added a rule: flag any back-to-back same-amount Sysco charges going forward</div>
+        `;
+      } else if (b.dataset.choice === 'real') {
+        body = `
+          <div class="check-line"><span class="chk">✓</span> Kept both 4/18 and 4/19 charges as real purchases</div>
+          <div class="check-line"><span class="chk">✓</span> Rule added: Sysco sometimes bills twice in a week — don't flag as duplicate</div>
+        `;
+      } else {
+        body = `
+          <div class="check-line"><span class="chk">!</span> Held for Jordan's review — she'll call Sysco and confirm.</div>
+        `;
+      }
+      r.innerHTML = body;
+      markDone(2);
+    });
+  });
+
+  // -------- Progress + completion --------
+  function markDone(n) {
+    document.getElementById('dot-' + n).classList.add('done');
+    const done = Object.values(state).filter(q => q.resolved).length;
+    document.getElementById('progressText').textContent = done + ' of 2 answered';
+    if (done === 2) {
+      setTimeout(() => {
+        document.getElementById('banner').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 400);
+    }
+  }
+
+  function categoryToGL(cat) {
+    return ({
+      'Supplies':  '6300 · Office & supplies',
+      'Meals':     '6400 · Meals & entertainment',
+      'Utilities': '6200 · Utilities',
+      'Travel':    '6450 · Travel',
+      'Equipment': '1520 · Equipment (capitalized)',
+      'Other':     '6900 · Other operating expense'
+    })[cat] || '6900 · Other operating expense';
+  }
+
+  function escapeHTML(s) {
+    return (s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  // -------- Autofill demo helper --------
+  document.getElementById('autofill').addEventListener('click', () => {
+    if (state.q1.resolved && state.q2.resolved) return;
+    // Q1
+    if (!state.q1.resolved) {
+      const suppliesOpt = [...opts1].find(o => o.dataset.cat === 'Supplies');
+      suppliesOpt.click();
+      const vEl = document.getElementById('vendor1');
+      const dEl = document.getElementById('desc1');
+      vEl.value = 'Restaurant Supply Co.';
+      dEl.value = 'Cloth napkins for the private catering event on 4/22.';
+      state.q1.vendor = vEl.value;
+      state.q1.desc = dEl.value;
+      upload1.click();
+      setTimeout(() => resolveQ1(), 400);
+    }
+    // Q2
+    if (!state.q2.resolved) {
+      setTimeout(() => {
+        document.querySelector('[data-choice="duplicate"]').click();
+      }, 900);
+    }
+  });
+</script>
+
+</body>
+</html>
